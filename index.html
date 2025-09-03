@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Timer</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <!-- Supabase JS (optional: only used if you add your URL + anon key in app.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">⏱️ Task Timer</div>
+    <div id="authControls" class="auth-controls"></div>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <div class="filters">
+        <button class="chip chip-active" data-filter="all">All</button>
+        <button class="chip" data-filter="active">Active</button>
+        <button class="chip" data-filter="completed">Completed</button>
+        <button class="chip" data-filter="scheduled">Scheduled</button>
+        <button class="chip" data-filter="overdue">Overdue</button>
+      </div>
+      <div class="quick-stats" id="quickStats"></div>
+    </section>
+
+    <section class="add-task">
+      <input id="newTaskTitle" class="input" placeholder="Start new task..." />
+      <input id="newTaskDue" class="input" type="date" />
+      <select id="newTaskProject" class="input">
+        <option value="">No Project</option>
+        <option>Work</option>
+        <option>Personal</option>
+        <option>Errands</option>
+      </select>
+      <button id="addTaskBtn" class="btn btn-primary">Add Task</button>
+    </section>
+
+    <section class="task-list">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Project</th>
+            <th>Controls</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Due</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="taskTbody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Auth Modal -->
+  <dialog id="authDialog" class="modal">
+    <form method="dialog" class="modal-box" id="authForm">
+      <div class="modal-header">
+        <h3 id="authTitle">Sign in</h3>
+        <button type="button" id="authClose" class="icon-btn" aria-label="Close">✕</button>
+      </div>
+      <div class="tabs">
+        <button type="button" class="tab tab-active" data-mode="signin">Email/Password</button>
+        <button type="button" class="tab" data-mode="signup">Create account</button>
+        <button type="button" class="tab" data-mode="magic">Magic link</button>
+      </div>
+      <div class="grid gap">
+        <input id="authEmail" type="email" required placeholder="Email" class="input"/>
+        <input id="authPassword" type="password" required placeholder="Password" class="input"/>
+        <button id="authSubmit" class="btn btn-primary" type="submit">Sign in</button>
+        <p id="authMessage" class="muted"></p>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="footer">
+    <span>Made for you — static website that works in any browser. Optional Supabase login.</span>
+  </footer>
+</body>
+</html>
