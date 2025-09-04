@@ -117,7 +117,7 @@ async function onAuthSubmit(e) {
 
   try {
     if (authMode === "magic") {
-      const { error } = await supa.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.origin } });
+      const { error } = await supa.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.href.split('#')[0] } });
       if (error) throw error;
       msg.textContent = "Check your email for the login link.";
     } else if (authMode === "signup") {
